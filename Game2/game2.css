@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+    background: linear-gradient(135deg, #ff6f61, #6b6bde);
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 500px;
+    margin: auto;
+}
+
+h1 {
+    color: #ff6f61;
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+#artist-input {
+    margin: 10px;
+    padding: 10px;
+    width: 80%;
+    max-width: 300px;
+    border: 2px solid #6b6bde;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: purple;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+#audio-player {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #ff6f61;
+}
+
+#level, #attempts {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #6b6bde;
+}

@@ -1,0 +1,56 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000;
+}
+
+.game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #fff;
+}
+
+canvas {
+    background: #000;
+}
+
+#start-game {
+    position: absolute;
+    top: 8%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#start-game:hover {
+    background-color: red;
+}
+
+#pause-game {
+    position: absolute;
+    top: 27px; /* Adjust as needed */
+    left: 60%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#pause-game:hover {
+    background-color: red;
+}
+
