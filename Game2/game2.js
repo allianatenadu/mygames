@@ -1,13 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const songs = [
-        {src: 'audio/song1.mp3', artist: 'Black Sherif'},
-        {src: 'audio/song2.mp3', artist: 'Iniko'},
-        {src: 'audio/song3.wav', artist: 'RTD Ankapong'}
+    const levels = [
+        [
+            {src: 'audio/song1.mp3', artist: 'Artist1'},
+            {src: 'audio/song2.mp3', artist: 'Artist2'},
+            {src: 'audio/song3.mp3', artist: 'Artist3'}
+        ],
+        [
+            {src: 'audio/song4.mp3', artist: 'Artist4'},
+            {src: 'audio/song5.mp3', artist: 'Artist5'},
+            {src: 'audio/song6.mp3', artist: 'Artist6'}
+        ],
+        [
+            {src: 'audio/song7.mp3', artist: 'Artist7'},
+            {src: 'audio/song8.mp3', artist: 'Artist8'},
+            {src: 'audio/song9.mp3', artist: 'Artist9'}
+        ]
     ];
-    let currentSongIndex = 0;
+    let currentLevel = 0;
+    let currentStage = 0;
     let attemptsLeft = 3;
-    let level = 1;
-    let timer;  // To keep track of the timer
+    let totalAttempts = 3;
+    let timer;
 
     const audioPlayer = document.getElementById('audio-player');
     const playBtn = document.getElementById('play-btn');
@@ -26,14 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function playSong() {
-        audioPlayer.src = songs[currentSongIndex].src;
+        const song = levels[currentLevel][currentStage];
+        audioPlayer.src = song.src;
         audioPlayer.play();
         timer = setTimeout(() => {
             audioPlayer.pause();
-            message.textContent = `Time's up! The correct answer was ${songs[currentSongIndex].artist}.`;
+            message.textContent = `Time's up! The correct answer was ${song.artist}.`;
             attemptsLeft--;
             if (attemptsLeft <= 0) {
-                message.textContent = `Sorry, you lost! The correct answer was ${songs[currentSongIndex].artist}.`;
+                message.textContent = `Sorry, you lost! The correct answer was ${song.artist}.`;
                 resetGame();
             }
             updateLevelAndAttempts();
@@ -42,23 +56,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function checkAnswer() {
         const userGuess = artistInput.value.trim();
-        if (userGuess.toLowerCase() === songs[currentSongIndex].artist.toLowerCase()) {
-            message.textContent = 'Correct! Moving to the next level!';
+        const song = levels[currentLevel][currentStage];
+        if (userGuess.toLowerCase() === song.artist.toLowerCase()) {
+            message.textContent = 'Correct!';
             clearTimeout(timer);  // Stop the timer
             audioPlayer.pause();
-            level++;
-            currentSongIndex++;
-            if (currentSongIndex >= songs.length) {
-                message.textContent = 'Congratulations! You have completed all levels!';
-                resetGame();
-            } else {
-                playSong();  // Play the next song
+            currentStage++;
+            if (currentStage >= levels[currentLevel].length) {
+                currentLevel++;
+                currentStage = 0;
+                if (currentLevel >= levels.length) {
+                    message.textContent = 'Congratulations! You have completed all levels!';
+                    resetGame();
+                } else {
+                    message.textContent = `Level ${currentLevel} completed! Moving to Level ${currentLevel + 1}.`;
+                }
             }
         } else {
             attemptsLeft--;
             message.textContent = `Incorrect! You have ${attemptsLeft} attempts left.`;
             if (attemptsLeft <= 0) {
-                message.textContent = `Sorry, you lost! The correct answer was ${songs[currentSongIndex].artist}.`;
+                message.textContent = `Sorry, you lost! The correct answer was ${song.artist}.`;
                 resetGame();
             }
         }
@@ -67,14 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateLevelAndAttempts() {
-        levelDisplay.textContent = `Level: ${level}`;
+        levelDisplay.textContent = `Level: ${currentLevel + 1} - Stage: ${currentStage + 1}`;
         attemptsDisplay.textContent = `Attempts Left: ${attemptsLeft}`;
     }
 
     function resetGame() {
-        currentSongIndex = 0;
-        attemptsLeft = 3;
-        level = 1;
+        currentLevel = 0;
+        currentStage = 0;
+        attemptsLeft = totalAttempts;
         updateLevelAndAttempts();
     }
 
