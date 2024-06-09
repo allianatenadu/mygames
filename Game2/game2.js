@@ -1,19 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     const levels = [
         [
-            {src: 'audio/song1.mp3', artist: 'Artist1'},
-            {src: 'audio/song2.mp3', artist: 'Artist2'},
-            {src: 'audio/song3.mp3', artist: 'Artist3'}
+            {src: 'audio/song1.mp3', artist: 'Black Sherif'},
+            {src: 'audio/song2.mp3', artist: 'Stoneboy'},
+            {src: 'audio/song8.mp3', artist: 'Ayra Star'}
         ],
         [
-            {src: 'audio/song4.mp3', artist: 'Artist4'},
-            {src: 'audio/song5.mp3', artist: 'Artist5'},
-            {src: 'audio/song6.mp3', artist: 'Artist6'}
+            {src: 'audio/song4.mp3', artist: 'Rema'},
+            {src: 'audio/song5.mp3', artist: 'Yhaw Hero'},
+            {src: 'audio/song6.mp3', artist: 'Ellie Goulding'}
         ],
         [
-            {src: 'audio/song7.mp3', artist: 'Artist7'},
-            {src: 'audio/song8.mp3', artist: 'Artist8'},
-            {src: 'audio/song9.mp3', artist: 'Artist9'}
+            {src: 'audio/song3.wav', artist: 'RTD Ankapong'},
+            {src: 'audio/song7.mp3', artist: 'Iniko'},
+            {src: 'audio/song9.mp3', artist: 'Yhaw Hero'}
         ]
     ];
     let currentLevel = 0;
@@ -44,13 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         audioPlayer.play();
         timer = setTimeout(() => {
             audioPlayer.pause();
-            message.textContent = `Time's up! The correct answer was ${song.artist}.`;
-            attemptsLeft--;
-            if (attemptsLeft <= 0) {
-                message.textContent = `Sorry, you lost! The correct answer was ${song.artist}.`;
-                resetGame();
-            }
-            updateLevelAndAttempts();
+            message.textContent = `Time's up! Type your answer below.`;
         }, 60000); // play for 1 minute (60000 ms)
     }
 
@@ -72,6 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     message.textContent = `Level ${currentLevel} completed! Moving to Level ${currentLevel + 1}.`;
                 }
             }
+            artistInput.value = '';
+            updateLevelAndAttempts();
+            playSong(); // Automatically play the next song
         } else {
             attemptsLeft--;
             message.textContent = `Incorrect! You have ${attemptsLeft} attempts left.`;
@@ -94,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentStage = 0;
         attemptsLeft = totalAttempts;
         updateLevelAndAttempts();
+        audioPlayer.pause();
     }
 
     updateLevelAndAttempts();
