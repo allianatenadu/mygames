@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Define the levels with their respective songs and artists
     const levels = [
         [
             {src: 'audio/song1.mp3', artist: 'Black Sherif'},
@@ -16,12 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
             {src: 'audio/song9.mp3', artist: 'Yhaw Hero'}
         ]
     ];
+
+    // Initialize game state variables
     let currentLevel = 0;
     let currentStage = 0;
     let attemptsLeft = 3;
     let totalAttempts = 3;
     let timer;
 
+    // Get references to DOM elements
     const audioPlayer = document.getElementById('audio-player');
     const playBtn = document.getElementById('play-btn');
     const submitBtn = document.getElementById('submit-btn');
@@ -30,14 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const levelDisplay = document.getElementById('level');
     const attemptsDisplay = document.getElementById('attempts');
 
+    // Add event listener to play button
     playBtn.addEventListener('click', () => {
         playSong();
     });
 
+    // Add event listener to submit button
     submitBtn.addEventListener('click', () => {
         checkAnswer();
     });
 
+    // Function to play the current song
     function playSong() {
         const song = levels[currentLevel][currentStage];
         audioPlayer.src = song.src;
@@ -48,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 60000); // play for 1 minute (60000 ms)
     }
 
+    // Function to check the user's answer
     function checkAnswer() {
         const userGuess = artistInput.value.trim();
         const song = levels[currentLevel][currentStage];
@@ -81,11 +89,13 @@ document.addEventListener('DOMContentLoaded', () => {
         updateLevelAndAttempts();
     }
 
+    // Function to update the level and attempts display
     function updateLevelAndAttempts() {
         levelDisplay.textContent = `Level: ${currentLevel + 1} - Stage: ${currentStage + 1}`;
         attemptsDisplay.textContent = `Attempts Left: ${attemptsLeft}`;
     }
 
+    // Function to reset the game
     function resetGame() {
         currentLevel = 0;
         currentStage = 0;
@@ -94,5 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
         audioPlayer.pause();
     }
 
+    // Initialize the level and attempts display
     updateLevelAndAttempts();
 });
