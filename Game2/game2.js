@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Define the levels with their respective songs and artists
     const levels = [
         [
-            {src: 'audio/song1.mp3', artist: 'Black Sherif'},
+            {src: 'audio/song1.mp3', artist: 'Black sherif'},
             {src: 'audio/song2.mp3', artist: 'Stoneboy'},
             {src: 'audio/song8.mp3', artist: 'Ayra Star'}
         ],
@@ -107,3 +107,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the level and attempts display
     updateLevelAndAttempts();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
